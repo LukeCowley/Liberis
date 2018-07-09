@@ -27,7 +27,7 @@ gulp.task('default', ['copyHtml'], function () {
         extensions: ['.ts']
     })
     .bundle()
-    .pipe(source('bundle.js'))
+    .pipe(source('bca-eligibility.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
