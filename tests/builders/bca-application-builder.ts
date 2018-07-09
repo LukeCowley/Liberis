@@ -2,10 +2,6 @@ import {Application} from '../../src/models/application';
 import {Transaction} from '../../src/models/transaction';
 import {YmTimeSpan} from '../../src/models/ym-time-span';
 
-export interface ApplicationBuilder{
-    build();
-}
-
 export class ApplicationBuilder implements ApplicationBuilder{
     app: Application;
     constructor(app?: Application ){
@@ -23,6 +19,7 @@ export class ApplicationBuilder implements ApplicationBuilder{
 
     addAmount(amount: number){
         this.app.amountRequested = amount;
+        return this;
     }
 
     addTimeInBusiness(years: number, months: number){
@@ -32,6 +29,7 @@ export class ApplicationBuilder implements ApplicationBuilder{
         };
 
         this.app.timeInBusiness = timeInBus;
+        return this;
     }
 
     addTransaction(date: Date, value: number){
@@ -39,5 +37,37 @@ export class ApplicationBuilder implements ApplicationBuilder{
             date: date, 
             value: value
         }
+        this.app.transactions.push(transaction);
+        return this;
+    }
+
+    addValidAmount(){
+        this.addAmount(10000);
+        return this;
+    }
+
+    addValidTimeInBusiness(){
+        this.addTimeInBusiness(2,0);
+        return this;
+    }
+
+    addValidTransactions(){
+        this.addTransaction(new Date(2017, 1, 1), 50000);
+        this.addTransaction(new Date(2017, 2, 1), 50000);
+        this.addTransaction(new Date(2017, 3, 1), 50000);
+        this.addTransaction(new Date(2017, 4, 1), 50000);
+        this.addTransaction(new Date(2017, 5, 1), 50000);
+        this.addTransaction(new Date(2017, 6, 1), 50000);
+        this.addTransaction(new Date(2017, 7, 1), 50000);
+        this.addTransaction(new Date(2017, 8, 1), 50000);
+        this.addTransaction(new Date(2017, 9, 1), 50000);
+        this.addTransaction(new Date(2017, 10, 1), 50000);
+        this.addTransaction(new Date(2017, 11, 1), 50000);
+        this.addTransaction(new Date(2017, 12, 1), 50000);
+        return this;
+    }
+
+    build(){
+        return this.app;
     }
 }
