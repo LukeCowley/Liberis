@@ -52,18 +52,20 @@ export class ApplicationBuilder implements ApplicationBuilder{
     }
 
     addValidTransactions(){
-        this.addTransaction(new Date(2017, 1, 1), 50000);
-        this.addTransaction(new Date(2017, 2, 1), 50000);
-        this.addTransaction(new Date(2017, 3, 1), 50000);
-        this.addTransaction(new Date(2017, 4, 1), 50000);
-        this.addTransaction(new Date(2017, 5, 1), 50000);
-        this.addTransaction(new Date(2017, 6, 1), 50000);
-        this.addTransaction(new Date(2017, 7, 1), 50000);
-        this.addTransaction(new Date(2017, 8, 1), 50000);
-        this.addTransaction(new Date(2017, 9, 1), 50000);
-        this.addTransaction(new Date(2017, 10, 1), 50000);
-        this.addTransaction(new Date(2017, 11, 1), 50000);
-        this.addTransaction(new Date(2017, 12, 1), 50000);
+        let today = new Date(Date.now());
+
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth(), 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 1, 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 2, 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 3, 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 4, 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 5, 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 6, 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 7, 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 8, 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 9, 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 10, 1), 50000);
+        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 11, 1), 50000);
         return this;
     }
 
