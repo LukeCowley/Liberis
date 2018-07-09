@@ -17,12 +17,20 @@ var BcaCalculator = function () {
         value: function IsEligible(application) {
             return false;
         }
+    }, {
+        key: "GetApplicationFromFile",
+        value: function GetApplicationFromFile(file) {}
     }]);
 
     return BcaCalculator;
 }();
 
 exports.BcaCalculator = BcaCalculator;
+function parseFile(file) {
+    //placeholder below
+    var timeSpan = { years: "2", months: "3" };
+    return timeSpan;
+}
 
 },{}],2:[function(require,module,exports){
 "use strict";
