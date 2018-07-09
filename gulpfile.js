@@ -1,19 +1,28 @@
 var gulp = require('gulp');
+var mocha = require('gulp-mocha')
+var sourcemaps = require('gulp-sourcemaps');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var tsify = require('tsify');
-var sourcemaps = require('gulp-sourcemaps');
 var buffer = require('vinyl-buffer');
 var paths = {
     pages: ['src/*.html']
 };
 
-gulp.task('copyHtml', function () {
+gulp.task('copyHtml', () => {
     return gulp.src(paths.pages)
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['copyHtml'], function () {
+gulp.task('unitTests', () =>{
+    return gulp.src('tests/**/*.spec.ts')
+        .pipe(mocha({
+            reporter: 'nyan',
+            require: ['ts-node/register']
+        }));
+});
+
+gulp.task('default', ['unitTests', 'copyHtml'], () => {
     return browserify({
         basedir: '.',
         debug: true,
