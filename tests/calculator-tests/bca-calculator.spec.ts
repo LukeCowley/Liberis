@@ -1,11 +1,18 @@
 import {assert} from 'chai';
 import {BcaCalculator} from '../../src/bca-calculator'
+import { ApplicationBuilder } from '../builders/bca-application-builder';
 
 describe('bca calculator tests', () => {
     describe('IsEligible', () => {  
         //*********min/max amount *********/
         it('return false for amount < 5000', () =>{
-            var calc = new BcaCalculator();
+            let builder = new ApplicationBuilder();
+            builder.addAmount(1000)
+                .addValidTimeInBusiness()
+                .addValidTransactions();
+            let app = builder.build();
+
+            assert.isFalse(BcaCalculator.IsEligible(app));
         });
     
         // it('return false for amount > 50,000', () => {
