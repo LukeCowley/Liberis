@@ -6,36 +6,79 @@ describe('bca calculator tests', () => {
     describe('IsEligible', () => {  
         //*********min/max amount *********/
         it('return false for amount < 5000', () =>{
+            //assemble
             let builder = new ApplicationBuilder();
             builder.addAmount(1000)
                 .addValidTimeInBusiness()
                 .addValidTransactions();
             let app = builder.build();
-
-            assert.isFalse(BcaCalculator.IsEligible(app));
+            
+            //act
+            let result = BcaCalculator.IsEligible(app);
+            
+            //assert
+            assert.isFalse(result);
         });
     
         it('return false for amount > 50,000', () => {
+            //assemble
             let builder = new ApplicationBuilder();
             builder.addAmount(50001)
                 .addValidTimeInBusiness()
                 .addValidTransactions();
             let app = builder.build();
+            
+            //act
+            let result = BcaCalculator.IsEligible(app);
 
-            assert.isFalse(BcaCalculator.IsEligible(app));
+            //assert
+            assert.isFalse(result);
         });
     
-        // it('return true for amount: 5000', () => {
-        //     assert.isTrue(false);
-        // });
+        it('return true for amount: 5000', () => {
+            //assemble
+            let builder = new ApplicationBuilder();
+            builder.addAmount(5000)
+                .addValidTimeInBusiness()
+                .addValidTransactions();
+            let app = builder.build();
+
+            //act
+            let result = BcaCalculator.IsEligible(app);
+
+            //assert
+            assert.isTrue(result);
+        });
     
-        // it('return true for amount: 50,000', () => {
-        //     assert.isTrue(false);
-        // });
+        it('return true for amount: 50,000', () => {
+            //assemble
+            let builder = new ApplicationBuilder();
+            builder.addAmount(50000)
+                .addValidTimeInBusiness()
+                .addValidTransactions();
+            let app = builder.build();
+
+            //act
+            let result = BcaCalculator.IsEligible(app);
+
+            //assert
+            assert.isTrue(result);
+        });
     
-        // it('return true for 5000 <= amount <= 50,000', () =>{
-        //     assert.isTrue(false);
-        // });
+        it('return true for 5000 <= amount <= 50,000', () =>{
+            //assemble
+            let builder = new ApplicationBuilder();
+            builder.addAmount(25000)
+                .addValidTimeInBusiness()
+                .addValidTransactions();
+            let app = builder.build();
+
+            //act
+            let result = BcaCalculator.IsEligible(app);
+
+            //assert
+            assert.isTrue(result);
+        });
         
         // //*********transaction avg/month *********/
         // it('return false if transaction avg/month < requested amount', () =>{
