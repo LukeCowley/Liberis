@@ -5,7 +5,7 @@ gulp.task('build', () => {
   return gulp.src('src/**/*.ts')
     .pipe(ts({
         noImplicitAny: true,
-        outFile: "output.js"
+        outFile: "bca-eligibility.js"
     }))
     .pipe(gulp.dest('dist'));
 });
