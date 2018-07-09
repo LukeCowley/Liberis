@@ -82,7 +82,19 @@ describe('bca calculator tests', () => {
         
         //*********transaction avg/month *********/
         it('return false if transaction avg/month < requested amount', () =>{
-           assert.isTrue(false);
+            //assemble
+            let builder = new ApplicationBuilder();
+            builder.addAmount(7500)
+               .addValidTimeInBusiness()
+               .addValidTransactions(10000)
+            let app = builder.build();
+
+            //act
+            let result = BcaCalculator.IsEligible(app);
+            
+            //assert
+            assert.isFalse(result);
+
         });
     
         // it('return true if transaction avg/month >= requested amount', () => {

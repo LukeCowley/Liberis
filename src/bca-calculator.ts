@@ -8,6 +8,9 @@ export class BcaCalculator{
         if(!amountRequestedIsValid(application.amountRequested)){
             return false;
         }
+        if(!averageMonthlyTransactionIsHigherThanAmount(application.transactions, application.amountRequested)){
+            return false;
+        }
         return true;
     } 
 
@@ -26,5 +29,23 @@ function amountRequestedIsValid(amount: number){
 }
 
 function averageMonthlyTransactionIsHigherThanAmount(transactions: Array<Transaction>, amount: number){
-    let montlyTrans = _.groupBy(transactions, "date");
+    /*lodash chain below 
+     - group by month
+     - project sum and number of transactions
+     - project average
+     - */
+    
+    let aveTrans = _.chain(transactions)
+        .groupBy((t: Transaction) => t.date.getMonth())
+        .map((t: Array<Transaction>, id: string) => {
+            return {
+                sum: _.sumBy(t, (ts:Transaction)=> ts.value),
+                count: t.length
+            }
+        })
+        .map((t: any) => t.sum / t.count)
+        .value();
+
+    return Math.min(...aveTrans) > amount;
+
 }
