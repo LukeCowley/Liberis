@@ -22,7 +22,7 @@ gulp.task('unitTests', () =>{
         }));
 });
 
-gulp.task('default', ['unitTests', 'copyHtml'], () => {
+gulp.task('default', gulp.series(['unitTests', 'copyHtml']), () => {
     return browserify({
         basedir: '.',
         debug: true,

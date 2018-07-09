@@ -1,7 +1,7 @@
 import {Application} from './models/application';
 import {Transaction} from './models/transaction';
 import {YmTimeSpan} from './models/ym-time-span';
-import * as _ from 'lodash';
+import * as _ from 'lodash'
 
 export class BcaCalculator{
     static IsEligible(application: Application){
@@ -26,5 +26,5 @@ function amountRequestedIsValid(amount: number){
 }
 
 function averageMonthlyTransactionIsHigherThanAmount(transactions: Array<Transaction>, amount: number){
-    let montlyTrans = 
+    let montlyTrans = _.groupBy(transactions, "date");
 }

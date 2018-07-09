@@ -80,10 +80,10 @@ describe('bca calculator tests', () => {
             assert.isTrue(result);
         });
         
-        // //*********transaction avg/month *********/
-        // it('return false if transaction avg/month < requested amount', () =>{
-        //     assert.isTrue(false);
-        // });
+        //*********transaction avg/month *********/
+        it('return false if transaction avg/month < requested amount', () =>{
+           assert.isTrue(false);
+        });
     
         // it('return true if transaction avg/month >= requested amount', () => {
         //     assert.isTrue(false);
