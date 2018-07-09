@@ -1,17 +1,35 @@
-const gulp = require('gulp');
-const ts = require('gulp-typescript');
-const babel = require('gulp-babel');
+var gulp = require('gulp');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var tsify = require('tsify');
+var sourcemaps = require('gulp-sourcemaps');
+var buffer = require('vinyl-buffer');
+var paths = {
+    pages: ['src/*.html']
+};
 
-gulp.task('build', () => {
-  return gulp.src('src/**/*.ts')
-    .pipe(ts({
-        noImplicitAny: true,
-        outFile: 'bca-eligibility.js'
-    }))
-    .pipe(babel({
-        presets: ['env']
-    }))
-    .pipe(gulp.dest('dist'));
+gulp.task('copyHtml', function () {
+    return gulp.src(paths.pages)
+        .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['build']);
+gulp.task('default', ['copyHtml'], function () {
+    return browserify({
+        basedir: '.',
+        debug: true,
+        entries: ['src/index.ts'],
+        cache: {},
+        packageCache: {}
+    })
+    .plugin(tsify)
+    .transform('babelify', {
+        presets: ['es2015'],
+        extensions: ['.ts']
+    })
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('dist'));
+});
