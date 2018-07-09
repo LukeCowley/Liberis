@@ -1,3 +1,7 @@
+import {Application} from './models/application';
+import {Transaction} from './models/transaction';
+import {YmTimeSpan} from './models/ym-time-span';
+
 export class BcaCalculator{
     static IsEligible(application: File|Application){
         return false;
@@ -11,6 +15,4 @@ export class BcaCalculator{
 function parseFile(file: File){
     
     //placeholder below
-    let timeSpan: YmTimeSpan = {years: "2", months: "3" }
-    return timeSpan;
 }

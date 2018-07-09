@@ -1,4 +1,5 @@
 import { BcaCalculator } from "./bca-calculator";
+import { Application } from './models/application';
 
 function showHello(divName: string, name: string) {
     const elt = document.getElementById(divName);

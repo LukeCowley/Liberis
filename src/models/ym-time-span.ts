@@ -1,4 +1,4 @@
-interface YmTimeSpan {
+export interface YmTimeSpan {
     years: string,
     months: string
 }

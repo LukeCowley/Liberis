@@ -4,9 +4,9 @@ import {BcaCalculator} from '../../src/bca-calculator'
 describe('bca calculator tests', () => {
     describe('IsEligible', () => {  
         //*********min/max amount *********/
-        // it('return false for amount < 5000', () =>{
-        //     var calc = new BcaCalculator();
-        // });
+        it('return false for amount < 5000', () =>{
+            var calc = new BcaCalculator();
+        });
     
         // it('return false for amount > 50,000', () => {
         //     assert.isTrue(false);
