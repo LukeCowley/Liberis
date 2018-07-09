@@ -15,9 +15,15 @@ describe('bca calculator tests', () => {
             assert.isFalse(BcaCalculator.IsEligible(app));
         });
     
-        // it('return false for amount > 50,000', () => {
-        //     assert.isTrue(false);
-        // });
+        it('return false for amount > 50,000', () => {
+            let builder = new ApplicationBuilder();
+            builder.addAmount(50001)
+                .addValidTimeInBusiness()
+                .addValidTransactions();
+            let app = builder.build();
+
+            assert.isFalse(BcaCalculator.IsEligible(app));
+        });
     
         // it('return true for amount: 5000', () => {
         //     assert.isTrue(false);
