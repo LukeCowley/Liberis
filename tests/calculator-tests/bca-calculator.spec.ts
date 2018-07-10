@@ -55,7 +55,7 @@ describe('bca calculator tests', () => {
             let builder = new ApplicationBuilder();
             builder.addAmount(50000)
                 .addValidTimeInBusiness()
-                .addValidTransactions();
+                .addValidTransactions(100000);
             let app = builder.build();
 
             //act
@@ -65,12 +65,12 @@ describe('bca calculator tests', () => {
             assert.isTrue(result);
         });
     
-        it('return true for 5000 <= amount <= 50,000', () =>{
+        it('return true for 5000 <= amount <= 50000', () =>{
             //assemble
             let builder = new ApplicationBuilder();
-            builder.addAmount(25000)
+            builder.addAmount(50000)
                 .addValidTimeInBusiness()
-                .addValidTransactions();
+                .addValidTransactions(100000);
             let app = builder.build();
 
             //act
