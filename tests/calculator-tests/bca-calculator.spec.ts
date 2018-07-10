@@ -86,7 +86,7 @@ describe('bca calculator tests', () => {
             let builder = new ApplicationBuilder();
             builder.addAmount(7500)
                .addValidTimeInBusiness()
-               .addValidTransactions(1000)
+               .addValidTransactions(1000);
             let app = builder.build();
 
             //act
@@ -97,13 +97,37 @@ describe('bca calculator tests', () => {
 
         });
     
-        // it('return true if transaction avg/month >= requested amount', () => {
-        //     assert.isTrue(false);
-        // })
+        it('return true if transaction avg/month >= requested amount', () => {
+            //assemble
+            let builder = new ApplicationBuilder();
+            builder.addAmount(7500)
+            .addValidTimeInBusiness()
+            .addValidTransactions(10000);
+        
+            let app = builder.build();
+
+            //act
+            let result = BcaCalculator.IsEligible(app);
+
+            //assert
+            assert.isTrue(result);
+        })
     
-        // it('return true if transaction avg/month == requested amount', () =>{
-        //     assert.isTrue(false);
-        // });
+        it('return false if transaction avg/month == requested amount', () =>{
+            //assemble
+            let builder = new ApplicationBuilder();
+            builder.addAmount(7500)
+            .addValidTimeInBusiness()
+            .addValidTransactions(7500);
+        
+            let app = builder.build();
+
+            //act
+            let result = BcaCalculator.IsEligible(app);
+
+            //assert
+            assert.isFalse(result);
+        });
 
         // //*********business details *********/
         // it('return false if business age > 12 months', () => {
