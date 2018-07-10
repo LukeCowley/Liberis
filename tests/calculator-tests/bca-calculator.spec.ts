@@ -86,7 +86,7 @@ describe('bca calculator tests', () => {
             let builder = new ApplicationBuilder();
             builder.addAmount(7500)
                .addValidTimeInBusiness()
-               .addValidTransactions(10000)
+               .addValidTransactions(1000)
             let app = builder.build();
 
             //act
