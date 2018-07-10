@@ -8,7 +8,13 @@ export class BcaCalculator{
         if(!amountRequestedIsValid(application.amountRequested)){
             return false;
         }
+        if(!application.transactions || application.transactions.length === 0){
+            return false;
+        }
         if(!averageMonthlyTransactionIsHigherThanAmount(application.transactions, application.amountRequested)){
+            return false;
+        }
+        if(!timeInBusinessIsGreaterThan(application.timeInBusiness, 12)){
             return false;
         }
         return true;
@@ -45,7 +51,13 @@ function averageMonthlyTransactionIsHigherThanAmount(transactions: Array<Transac
         })
         .map((t: any) => t.sum / t.count)
         .value();
-
     return Math.min(...aveTrans) > amount;
+}
 
+function timeInBusinessIsGreaterThan(timeInBusiness: YmTimeSpan, months: number){
+    return timeInBusiness.getTotalMonths() > months;
+}
+
+function hasTransactions(transactions: Array<Transaction>){
+    return transactions;
 }

@@ -23,10 +23,7 @@ export class ApplicationBuilder implements ApplicationBuilder{
     }
 
     addTimeInBusiness(years: number, months: number){
-        let timeInBus: YmTimeSpan = {
-            months: months.toString(),
-            years: years.toString()
-        };
+        let timeInBus: YmTimeSpan = new YmTimeSpan(years, months);
 
         this.app.timeInBusiness = timeInBus;
         return this;
