@@ -9,12 +9,12 @@ var paths = {
     pages: ['src/*.html']
 };
 
-gulp.task('copyHtml', () => {
+gulp.task('copy-html', () => {
     return gulp.src(paths.pages)
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('unitTests', () =>{
+gulp.task('unit-tests', () =>{
     return gulp.src('tests/**/*.spec.ts')
         .pipe(mocha({
             reporter: 'nyan',
@@ -22,7 +22,7 @@ gulp.task('unitTests', () =>{
         }));
 });
 
-gulp.task('default', gulp.series(['unitTests', 'copyHtml']), () => {
+gulp.task('default', gulp.series(['unit-tests', 'copy-html']), () => {
     return browserify({
         basedir: '.',
         debug: true,
@@ -42,3 +42,4 @@ gulp.task('default', gulp.series(['unitTests', 'copyHtml']), () => {
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('dist'));
 });
+
