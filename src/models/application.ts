@@ -4,5 +4,5 @@ import {Transaction} from './transaction';
 export interface Application {
     amountRequested: number,
     timeInBusiness: YmTimeSpan,
-    transactions: Array<Transaction>
+    transactions: Transaction[]
 }

@@ -1,6 +1,7 @@
 import {assert} from 'chai';
 import {BcaCalculator} from '../../src/bca-calculator'
 import { ApplicationBuilder } from '../builders/bca-application-builder';
+import * as moment from 'moment'
 
 describe('bca calculator tests', () => {
     describe('IsEligible', () => {  
@@ -177,6 +178,7 @@ describe('bca calculator tests', () => {
 
         // //*********transaction audit *********/
         it('return false if no transactions', () =>{
+            //assemble
             let builder = new ApplicationBuilder();
             builder.addAmount(7500)
                 .addTimeInBusiness(1, 1);
@@ -189,12 +191,33 @@ describe('bca calculator tests', () => {
             assert.isFalse(result);
         });
 
-        // it('return true if with missing transaction/month average applied *passes other validation*', () => {
-        //     assert.isTrue(false);
-        // });
+        it('return true if with missing transaction/month in last 12 months average applied *passes other validation*', () => {
+            //assemble
+            let builder = new ApplicationBuilder();
+            let amount = 5000;
+            builder.addAmount(9999)
+                .addTimeInBusiness(1, 1)
+                .addTransaction(moment().subtract(1, 'months'), amount)
+                .addTransaction(moment().subtract(1, 'months'), amount/2)
+                .addTransaction(moment().subtract(3, 'months'), amount)
+                .addTransaction(moment().subtract(4, 'months'), amount)
+                .addTransaction(moment().subtract(5, 'months'), amount)
+                .addTransaction(moment().subtract(6, 'months'), amount)
+                .addTransaction(moment().subtract(7, 'months'), amount)
+                .addTransaction(moment().subtract(8, 'months'), amount)
+                .addTransaction(moment().subtract(9, 'months'), amount)
+                .addTransaction(moment().subtract(10, 'months'), amount)
+                .addTransaction(moment().subtract(11, 'months'), amount)
+                .addTransaction(moment().subtract(12, 'months'), amount)
 
-        //it('return true if with missing transaction/month average applied *fails other validation*', () => {
-            //assert.isTrue(false);
-        //});       
+            let app = builder.build();
+
+            //act
+            let result = BcaCalculator.IsEligible(app);
+            
+            assert.isTrue(result);
+        });
+        
+        
     });
 });

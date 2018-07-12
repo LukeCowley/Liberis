@@ -1,6 +1,7 @@
 import {Application} from '../../src/models/application';
 import {Transaction} from '../../src/models/transaction';
 import {YmTimeSpan} from '../../src/models/ym-time-span';
+import * as moment from 'moment';
 
 export class ApplicationBuilder implements ApplicationBuilder{
     app: Application;
@@ -29,11 +30,8 @@ export class ApplicationBuilder implements ApplicationBuilder{
         return this;
     }
 
-    addTransaction(date: Date, value: number){
-        let transaction: Transaction = {
-            date: date, 
-            value: value
-        }
+    addTransaction(date: moment.Moment, value: number){
+        let transaction = new Transaction(date, value);
         this.app.transactions.push(transaction);
         return this;
     }
@@ -49,20 +47,19 @@ export class ApplicationBuilder implements ApplicationBuilder{
     }
 
     addValidTransactions(amount = 50000){
-        let today = new Date(Date.now());
-
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth(), 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 1, 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 2, 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 3, 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 4, 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 5, 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 6, 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 7, 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 8, 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 9, 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 10, 1), amount);
-        this.addTransaction(new Date(today.getFullYear() - 1, today.getMonth() + 11, 1), amount);
+        this.addTransaction(moment().subtract(1, 'months'), amount);
+        this.addTransaction(moment().subtract(1, 'months'), amount/2);
+        this.addTransaction(moment().subtract(2, 'months'), amount);
+        this.addTransaction(moment().subtract(3, 'months'), amount);
+        this.addTransaction(moment().subtract(4, 'months'), amount);
+        this.addTransaction(moment().subtract(5, 'months'), amount);
+        this.addTransaction(moment().subtract(6, 'months'), amount);
+        this.addTransaction(moment().subtract(7, 'months'), amount);
+        this.addTransaction(moment().subtract(8, 'months'), amount);
+        this.addTransaction(moment().subtract(9, 'months'), amount);
+        this.addTransaction(moment().subtract(10, 'months'), amount);
+        this.addTransaction(moment().subtract(11, 'months'), amount);
+        this.addTransaction(moment().subtract(12, 'months'), amount);
         return this;
     }
 
